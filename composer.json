@@ -1,0 +1,21 @@
+{
+  "name": "pug-mi/deepfaces",
+  "description": "Example package for pug-mi",
+  "type": "library",
+  "require": {
+    "phpunit/phpunit": "^9.5",
+    "orchestra/testbench": "^6.12",
+    "guzzlehttp/guzzle": "^7.2",
+    "intervention/image": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "PugMi\\DeepFaces\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}
