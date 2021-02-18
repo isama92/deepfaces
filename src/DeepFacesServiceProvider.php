@@ -3,26 +3,29 @@
 
 namespace PugMi\DeepFaces;
 
+use Illuminate\Support\ServiceProvider;
+use PugMi\DeepFaces\Services\DeepFaces;
 
-class DeepFacesServiceProvider extends \Illuminate\Support\ServiceProvider
+class DeepFacesServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom($this->getPackagePath() . '/config/deepfaces.php', 'deepfaces');
+        $this->mergeConfigFrom($this->packagePath() . '/config/deepfaces.php', 'deepfaces');
+        $this->app->singleton('deepfaces', function (){ return new DeepFaces(); });
     }
 
     public function boot()
     {
-        $this->loadRoutesFrom($this->getPackagePath() . '/routes/web.php');
+        $this->loadRoutesFrom($this->packagePath() . '/routes/web.php');
 
-        $this->loadViewsFrom($this->getPackagePath() . '/resources/views', 'deepfaces');
-
+        $this->loadViewsFrom($this->packagePath() . '/resources/views', 'deepfaces');
+        
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
     }
 
-    private function getPackagePath()
+    private function packagePath()
     {
         return __DIR__ . '/..';
     }

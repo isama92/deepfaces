@@ -4,17 +4,13 @@
 namespace PugMi\DeepFaces\Http\Controllers;
 
 
-use Illuminate\Support\Facades\Http;
-use Intervention\Image\Facades\Image;
-use PugMi\DeepFaces\Services\DeepFacesService;
+use PugMi\DeepFaces\Services\DeepFaces;
 
 class DeepFacesController
 {
-    public function __invoke(?int $qty, DeepFacesService $deepFacesService)
-    {
-        $imgs = $deepFacesService->loadImages($qty);
-
-        $faces = $imgs;
+    public function __invoke(DeepFaces $deepFaces, $qty) {
+        $faces = $deepFaces->getFaces($qty); // uses injected Service from Container
+//        $faces = \DeepFaces::getFaces($qty); // uses Facade
 
         return view('deepfaces::index')->with(compact('faces'));
     }

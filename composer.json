@@ -3,8 +3,8 @@
   "description": "Example package for pug-mi",
   "type": "library",
   "require": {
-    "phpunit/phpunit": "^9.5",
     "orchestra/testbench": "^6.12",
+    "phpunit/phpunit": "^9.5",
     "guzzlehttp/guzzle": "^7.2",
     "intervention/image": "^2.5"
   },
@@ -16,6 +16,16 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "PugMi\\DeepFaces\\DeepFacesServiceProvider"
+      ],
+      "aliases": {
+        "DeepFaces": "PugMi\\DeepFaces\\Facades\\DeepFacesFacade"
+      }
     }
   }
 }
